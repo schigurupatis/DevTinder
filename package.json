@@ -1,0 +1,27 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "tinder for devs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schigurupatis/DevTinder.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "ExpressJS",
+    "MongoDB",
+    "and",
+    "ReactJS",
+    "Redux"
+  ],
+  "author": "Santha Kumar Chigurupati",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schigurupatis/DevTinder/issues"
+  },
+  "homepage": "https://github.com/schigurupatis/DevTinder#readme"
+}

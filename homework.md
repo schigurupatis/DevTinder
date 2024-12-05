@@ -20,3 +20,10 @@
 - Install Postman app and create account and create a workspace
 - create a collection and then make a HTTP Request GET Call
 - write logi to handle GET, POST, DELETE API calls and test them on Postman
+- Explore routing and use of different types of special charectors in routes
+     ? 
+     +
+     ()
+     *
+- Use of regex in routes /a/ and /.*fly$/
+- Reading the query params in the routes

@@ -2,18 +2,22 @@ const express = require("express");
 
 const app = express();
 
-app.get("/", (req, res) => {
-    res.send("Hello from the Home page: csk");
+app.use("/test", (req, res) => {
+    res.send("Hello from the Test page");
 });
 
-app.get("/login", (req, res) => {
+app.use("/login", (req, res) => {
     res.send("Hello from the Login page");
 });
 
-app.get("/dashboard", (req, res) => {
+app.use("/dashboard", (req, res) => {
     res.send("Hello from the Dashboard page");
 });
 
+app.use("/", (req, res) => {
+    res.send("Hello from the Home page: csk");
+});
+
 app.listen(7777, () => {
-    console.log("Server is successfully listening on port 6000...")
+    console.log("Server is successfully listening on port 7777...")
 });

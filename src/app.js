@@ -22,7 +22,26 @@ const app = express();
 //     })
 // })
 
-app.get("/user/ab?cd", (req, res) => {
+// ? in the route path makes the preceding character optional
+// app.get("/user/ab?cd", (req, res) => {
+//     console.log(req.params)
+//     res.send({
+//         firstName: "Santha Kumar",
+//         lastName: "Chigurupati"
+//     })
+// })
+
+// + in the route path means the preceding character must occur one or more times. matches atleast 1 b or more
+// app.get("/user/ab+cd", (req, res) => {
+//     console.log(req.params)
+//     res.send({
+//         firstName: "Santha Kumar",
+//         lastName: "Chigurupati"
+//     })
+// })
+
+// * (wildcard) matches zero or more characters in the path at the specified position. matches any string, number in between ab and cd
+app.get("/user/ab*cd", (req, res) => {
     console.log(req.params)
     res.send({
         firstName: "Santha Kumar",

@@ -41,13 +41,41 @@ const app = express();
 // })
 
 // * (wildcard) matches zero or more characters in the path at the specified position. matches any string, number in between ab and cd
-app.get("/user/ab*cd", (req, res) => {
+// app.get("/user/ab*cd", (req, res) => {
+//     console.log(req.params)
+//     res.send({
+//         firstName: "Santha Kumar",
+//         lastName: "Chigurupati"
+//     })
+// })
+
+// this matches, it works if b exists or not
+// app.get("/user/a(bb)?cd", (req, res) => {
+//     console.log(req.params)
+//     res.send({
+//         firstName: "Santha Kumar",
+//         lastName: "Chigurupati"
+//     })
+// })
+
+// this matches, it won't works if at least bb exists
+// app.get("/user/a(bb)+cd", (req, res) => {
+//     console.log(req.params)
+//     res.send({
+//         firstName: "Santha Kumar",
+//         lastName: "Chigurupati"
+//     })
+// })
+
+// this matches, regular expression, we can have anything in that route
+app.get("/*/", (req, res) => {
     console.log(req.params)
     res.send({
         firstName: "Santha Kumar",
         lastName: "Chigurupati"
     })
 })
+
 
 
 

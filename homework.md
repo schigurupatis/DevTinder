@@ -27,3 +27,14 @@
      *
 - Use of regex in routes /a/ and /.*fly$/
 - Reading the query params in the routes
+
+# Episode 05 Middlewares & Error Handlers
+
+- Route Handlers
+- Multiple Route Handlers
+- next() method
+- Handling Multiple Route Handlers with next() method
+- Handling Array of Multiple Route Handlers & played with code 
+- Middleware (next() method)
+- How ExpressJS basically handles the requests behind the scenes
+- 

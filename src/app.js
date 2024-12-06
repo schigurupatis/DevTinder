@@ -7,9 +7,20 @@ const { adminAuth, userAuth } = require("./middleware/auth")
 // Handle Auth Middleware for all GET, POST, PATCH, DELETE ... requests
 app.use("/admin", adminAuth );
 app.use("/user", userAuth);
+app.use("/", (err, req, res, next) => {
+    if(err) {
+        res.status(500).send("Something Went Wrong")
+    }
+})
 
 app.get("/user", (req, res) => {
-    res.send("User data send")
+    try {
+        throw new Error("aaaaaaa");
+        res.send("User data send")
+    }
+    catch (err) {
+        res.status(500).send("Something Went Wrong")
+    }
 })
 
 app.get("/admin/getAllData", (req, res)=> {

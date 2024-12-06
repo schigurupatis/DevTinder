@@ -37,4 +37,6 @@
 - Handling Array of Multiple Route Handlers & played with code 
 - Middleware (next() method)
 - How ExpressJS basically handles the requests behind the scenes
-- 
+- Difference between app.use() and app.all
+- Written a Dummy Auth Middleware for admin
+- Written a Dummy Auth Middleware for all user routes except user/login

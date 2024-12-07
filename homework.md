@@ -56,3 +56,5 @@
 - Connect application to the  Database "connection-url/schigurupatis"
 - Call the connectDB function and conneect to database before starting application on 7777 port
 - Create User Schema & User Model
+- Create a /signup API to add Data to DataBase
+- Push some douments(users) using API calls through POSTMAN

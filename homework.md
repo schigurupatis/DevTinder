@@ -13,6 +13,8 @@
 - Difference between caret and tilde (^ vs ~)
 
 
+
+
 # Episode 04: Routing and Request Handlers
 
 - Play with routes and route extensions  ex. hello, /, helloo/z, /xyz
@@ -28,6 +30,9 @@
 - Use of regex in routes /a/ and /.*fly$/
 - Reading the query params in the routes
 
+
+
+
 # Episode 05 Middlewares & Error Handlers
 
 - Route Handlers
@@ -40,4 +45,14 @@
 - Difference between app.use() and app.all
 - Written a Dummy Auth Middleware for admin
 - Written a Dummy Auth Middleware for all user routes except user/login
-- 
+
+
+
+
+# Episode 06 DataBase, Schema & Models | Mongoose
+
+- Create a free cluster on mongoDB official website (Mongo Atlas)
+- Install Mongoose library
+- Connect application to the  Database "connection-url/schigurupatis"
+- Call the connectDB function and conneect to database before starting application on 7777 port
+- Create User Schema & User Model

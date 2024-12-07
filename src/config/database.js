@@ -6,11 +6,5 @@ const connectDB = async () => {
     );
 }
 
-connectDB()
-    .then(() => {
-        console.log("Database connection success")
-    }).catch((err) => {
-        console.log("Database connection failed")
-    })
+module.exports = connectDB;
 
-//mongoose.connect()

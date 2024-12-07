@@ -58,3 +58,12 @@
 - Create User Schema & User Model
 - Create a /signup API to add Data to DataBase
 - Push some douments(users) using API calls through POSTMAN
+
+
+
+
+
+# Episode 07 Diving into the API's
+
+- Find difference between Javascript Object & JSON Object
+- 

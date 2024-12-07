@@ -66,4 +66,4 @@
 # Episode 07 Diving into the API's
 
 - Find difference between Javascript Object & JSON Object
-- 
+- Automated Adding user(posting user) with json object from client in postman post request

@@ -3,32 +3,19 @@ const connectDB = require("./config/database")
 const app = express();
 const User = require("./models/user")
 
-//app.use(express.json());
+app.use(express.json());
 
 
 // Creating a new instance of the User Model
 app.post("/signup", async (req, res) => {
 
     // Adding user statically
-    const user = new User({
-        firstName: "Deepika",
-        lastName: "Padukone",
-        emailId: "deepikapadukone@gmail.com",
-        password: "deepikapadukone@123"
-    })
-
-    try {
-        await user.save();
-        res.send("Usere Added Successfully")
-    } catch (err) {
-        res.status(400).send("Error saving the user:" + err.message);
-    }
-
-
-
-    // Adding user Dynamically
-    //console.log(req.body);
-    // const user = new User(req.body)
+    //const user = new User({
+    //     firstName: "Deepika",
+    //     lastName: "Padukone",
+    //     emailId: "deepikapadukone@gmail.com",
+    //     password: "deepikapadukone@123"
+    // })
 
     // try {
     //     await user.save();
@@ -36,6 +23,19 @@ app.post("/signup", async (req, res) => {
     // } catch (err) {
     //     res.status(400).send("Error saving the user:" + err.message);
     // }
+
+
+
+    // Adding user Dynamically
+    console.log(req.body);
+    const user = new User(req.body)
+
+    try {
+        await user.save();
+        res.send("Usere Added Successfully")
+    } catch (err) {
+        res.status(400).send("Error saving the user:" + err.message);
+    }
 
 
 

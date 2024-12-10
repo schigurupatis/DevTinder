@@ -10,7 +10,7 @@ app.use(express.json());
 app.post("/signup", async (req, res) => {
 
     // Adding user statically
-    //const user = new User({
+    // const user = new User({
     //     firstName: "Deepika",
     //     lastName: "Padukone",
     //     emailId: "deepikapadukone@gmail.com",
@@ -27,7 +27,7 @@ app.post("/signup", async (req, res) => {
 
 
     // Adding user Dynamically
-    console.log(req.body);
+    //console.log(req.body);
     const user = new User(req.body)
 
     try {

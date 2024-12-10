@@ -11,10 +11,10 @@ app.post("/signup", async (req, res) => {
 
     // Adding user statically
     // const user = new User({
-    //     firstName: "Deepika",
-    //     lastName: "Padukone",
-    //     emailId: "deepikapadukone@gmail.com",
-    //     password: "deepikapadukone@123"
+    //     firstName: "Rahul2",
+    //     lastName: "Dravid",
+    //     emailId: "rahuldravid@gmail.com",
+    //     password: "rahuldravid@123"
     // })
 
     // try {
@@ -27,7 +27,7 @@ app.post("/signup", async (req, res) => {
 
 
     // Adding user Dynamically
-    //console.log(req.body);
+    console.log(req.body);
     const user = new User(req.body)
 
     try {
@@ -39,7 +39,13 @@ app.post("/signup", async (req, res) => {
 
 
 
-})
+});
+
+
+// getting data from DB 
+// app.get("/user", (req, res) => {
+//     res.send("Getting user data success")
+// })
 
 //Connecting to DataBase & Listening the Server
 connectDB()

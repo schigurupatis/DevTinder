@@ -67,3 +67,9 @@
 
 - Find difference between Javascript Object & JSON Object
 - Automated Adding user(posting user) with json object from client in postman post request
+
+
+
+# Episode 08 Data Sanitization & Schema Validation
+
+- 

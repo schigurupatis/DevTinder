@@ -27,12 +27,12 @@ app.post("/signup", async (req, res) => {
 
 
     // Adding user Dynamically
-    console.log(req.body);
+    //console.log(req.body);
     const user = new User(req.body)
 
     try {
         await user.save();
-        res.send("Usere Added Successfully")
+        res.send("User Added Successfully")
     } catch (err) {
         res.status(400).send("Error saving the user:" + err.message);
     }

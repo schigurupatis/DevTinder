@@ -7,25 +7,35 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     lastName: {
-        type: String
+        type: String,
     },
-    emaiId: {
+    emailId: {
         type: String,
         required: true,
+        unique: true,
     },
     firstName: {
-        type: String
+        type: String,
     },
     password: {
         type: String,
         required: true,
     },
     age: {
-        type: Number
+        type: Number,
     },
     gender: {
-        type: String
+        type: String,
     },
+    photoURL: {
+        type: String,
+        default: "https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png",
+    },
+    about: {
+        type: String,
+        default: "This is default about description of user",
+    },
+    skills: [String],
 })
 
 

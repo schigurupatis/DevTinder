@@ -45,15 +45,31 @@ app.post("/signup", async (req, res) => {
 // getting data from DB - GET
 app.get("/user", async (req, res) => {
     const userEmail = req.body.emailId;
-    //console.log(userEmail)
 
     try {
-        const user = await User.find({emailId: userEmail});
-        res.send(user);
+        const users = await User.find({emailId: userEmail});
+        if(users.length === 0) {
+            res.status(404).send("Users not found")
+        } else {
+            res.send(users);
+        }
     } catch (err) {
         res.status(400).send("User Not Found")
     }
     
+})
+
+// getting all users data - GET
+app.get("/feed", async (req, res) => {
+
+    try{
+        const usersData = await User.find({});
+        res.send(usersData)
+    } catch(err) {
+        res.status(404).send("something went wrong")
+    }
+
+    res.send("All users data");
 })
 
 

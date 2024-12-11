@@ -66,6 +66,9 @@
 - User.findOne with duplicate email ids, which object retun
 - API Get user by email
 - API Feed API - Get all users data
+- DELETE API   
+- PATCH API  (Update API)
+- Difference between PATCH and PUT
 - Automated Adding user(posting user) with json object from client in postman post request
 
 

@@ -83,6 +83,19 @@ app.delete("/user", async (req, res) => {
     }
 })
 
+// update user data - PATCH or UPDATE
+app.patch("/user", async (req, res) => {
+    console.log(req.body)
+    const userId = req.body.userId;
+    const data = req.body;
+    try {
+        await User.findByIdAndUpdate({ _id: userId }, data)
+        res.send("user updated successfully")
+    } catch (err) {
+        res.status(404).send("User not found")
+    }
+})
+
 
 // updating data in DB - PATCH
 //app.patch("/user", (req, res) => {

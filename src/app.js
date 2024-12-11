@@ -72,6 +72,17 @@ app.get("/feed", async (req, res) => {
     res.send("All users data");
 })
 
+// deleting user data - DELETE
+app.delete("/user", async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const user = await User.findByIdAndDelete(userId);
+        res.send("user deleted successfully");
+    } catch (err) {
+        res.status(404).send("user not found")
+    }
+})
+
 
 // updating data in DB - PATCH
 //app.patch("/user", (req, res) => {

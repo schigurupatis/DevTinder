@@ -48,6 +48,7 @@ app.get("/user", async (req, res) => {
 
     try {
         const users = await User.find({emailId: userEmail});
+        //const users = await User.findOne({emailId: userEmail});
         if(users.length === 0) {
             res.status(404).send("Users not found")
         } else {
@@ -61,7 +62,6 @@ app.get("/user", async (req, res) => {
 
 // getting all users data - GET
 app.get("/feed", async (req, res) => {
-
     try{
         const usersData = await User.find({});
         res.send(usersData)

@@ -61,6 +61,11 @@
 # Episode 07 Diving into the API's
 
 - Find difference between Javascript Object & JSON Object
+- Add the express.json middleware to your app
+- Make Signup API Dynamic to receive data from the end user
+- User.findOne with duplicate email ids, which object retun
+- API Get user by email
+- API Feed API - Get all users data
 - Automated Adding user(posting user) with json object from client in postman post request
 
 

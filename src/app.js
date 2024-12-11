@@ -1,12 +1,12 @@
 const express = require("express");
 const connectDB = require("./config/database")
 const app = express();
-const User = require("./models/user")
+const User = require("./models/user");
 
 app.use(express.json());
 
 
-// Creating a new instance of the User Model
+// Creating a new instance of the User Model - POST
 app.post("/signup", async (req, res) => {
 
     // Adding user statically
@@ -42,10 +42,38 @@ app.post("/signup", async (req, res) => {
 });
 
 
-// getting data from DB 
-// app.get("/user", (req, res) => {
-//     res.send("Getting user data success")
-// })
+// getting data from DB - GET
+app.get("/user", async (req, res) => {
+    const userEmail = req.body.emailId;
+    //console.log(userEmail)
+
+    try {
+        const user = await User.find({emailId: userEmail});
+        res.send(user);
+    } catch (err) {
+        res.status(400).send("User Not Found")
+    }
+    
+})
+
+
+// updating data in DB - PATCH
+//app.patch("/user", (req, res) => {
+    // const userId = req.body.userId;
+    // const data = req.body;
+    // try {
+    //     const user = await User.findByIdAndUpdate({ _id: userId }, data, {
+    //         returnDocument: "after",
+    //         runValidators: true,
+    //     });
+    //     console.log(user);
+    //     res.send("User updated successfully");
+    // } catch (err) { 
+    //     res.status(400).send("something went wrong")
+    // }
+
+    //res.send("Updated successfully")
+//})
 
 //Connecting to DataBase & Listening the Server
 connectDB()

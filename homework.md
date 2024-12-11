@@ -14,7 +14,6 @@
 
 
 
-
 # Episode 04: Routing and Request Handlers
 
 - Play with routes and route extensions  ex. hello, /, helloo/z, /xyz
@@ -29,7 +28,6 @@
      *
 - Use of regex in routes /a/ and /.*fly$/
 - Reading the query params in the routes
-
 
 
 
@@ -48,7 +46,6 @@
 
 
 
-
 # Episode 06 DataBase, Schema & Models | Mongoose
 
 - Create a free cluster on mongoDB official website (Mongo Atlas)
@@ -61,8 +58,6 @@
 
 
 
-
-
 # Episode 07 Diving into the API's
 
 - Find difference between Javascript Object & JSON Object
@@ -72,4 +67,9 @@
 
 # Episode 08 Data Sanitization & Schema Validation
 
-- 
+- Explore SchemaType options from the documentation
+- Add the options like required, unique, lowercase, min, minLength, trim
+- Add the option Default
+- Create a custom validate function for gender
+- Improve the DB Schema - PUT all appropriate validations on each field in Schema
+- Add timestamps to the userSchema

@@ -2,36 +2,23 @@ const express = require("express");
 const connectDB = require("./config/database")
 const app = express();
 const User = require("./models/user");
+const { validateSignupData } = require("./utils/validation.js")
 
 app.use(express.json());
 
 
 // Creating a new instance of the User Model - POST
 app.post("/signup", async (req, res) => {
-
-    // Adding user statically
-    // const user = new User({
-    //     firstName: "Rahul2",
-    //     lastName: "Dravid",
-    //     emailId: "rahuldravid@gmail.com",
-    //     password: "rahuldravid@123"
-    // })
-
-    // try {
-    //     await user.save();
-    //     res.send("Usere Added Successfully")
-    // } catch (err) {
-    //     res.status(400).send("Error saving the user:" + err.message);
-    // }
-
-
-
-    // Adding user Dynamically
-    //console.log(req.body);
-    const user = new User(req.body)
-
     try {
-        await user.save();
+        // 1. Validation of data 
+        validateSignupData(req);
+
+        // 2. Encrypt the Password
+
+
+        // 3. Store the user instance in DB
+        const user = new User(req.body)
+        await user.save();  
         res.send("User Added Successfully")
     } catch (err) {
         res.status(400).send("Error saving the user:" + err.message);
@@ -114,6 +101,8 @@ app.patch("/user", async (req, res) => {
 
     //res.send("Updated successfully")
 //})
+
+
 
 //Connecting to DataBase & Listening the Server
 connectDB()

@@ -69,6 +69,7 @@
 - DELETE API   
 - PATCH API  (Update API)
 - Difference between PATCH and PUT
+- Explore all API Methods of Mongoose
 - Automated Adding user(posting user) with json object from client in postman post request
 
 

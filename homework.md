@@ -31,7 +31,7 @@
 
 
 
-# Episode 05 Middlewares & Error Handlers
+# Episode 05: Middlewares & Error Handlers
 
 - Route Handlers
 - Multiple Route Handlers
@@ -46,7 +46,7 @@
 
 
 
-# Episode 06 DataBase, Schema & Models | Mongoose
+# Episode 06: DataBase, Schema & Models | Mongoose
 
 - Create a free cluster on mongoDB official website (Mongo Atlas)
 - Install Mongoose library
@@ -58,7 +58,7 @@
 
 
 
-# Episode 07 Diving into the API's
+# Episode 07: Diving into the API's
 
 - Find difference between Javascript Object & JSON Object
 - Add the express.json middleware to your app
@@ -74,7 +74,7 @@
 
 
 
-# Episode 08 Data Sanitization & Schema Validation
+# Episode 08: Data Sanitization & Schema Validation
 
 - Explore SchemaType options from the documentation
 - Add the options like required, unique, lowercase, min, minLength, trim
@@ -82,3 +82,13 @@
 - Create a custom validate function for gender
 - Improve the DB Schema - PUT all appropriate validations on each field in Schema
 - Add timestamps to the userSchema
+
+
+
+
+# Episode 09: Encrypting Psswords
+
+- Validate data in Signup API
+- Install bcrypt npm package
+- Create a PasswordHash using bcrypt.hash method & save the user with encrypted password in DB
+- 

@@ -5,6 +5,7 @@ const User = require("./models/user");
 const { validateSignupData } = require("./utils/validation.js")
 const bcrypt = require("bcrypt")
 const cookieParser = require("cookie-parser")
+const jwt = require("jsonwebtoken")
 
 app.use(express.json());
 app.use(cookieParser())
@@ -42,7 +43,7 @@ app.post("/login", async (req, res) => {
     try{
         const {emailId, password} = req.body;
 
-        const user = await User.findOne({ emailId: emailId});
+        const user = await User.findOne({ emailId});
         if(!user) {
             throw new Error("Invalid Credentials")
         }
@@ -51,11 +52,18 @@ app.post("/login", async (req, res) => {
 
         if(isPasswordValid) {
             // Create a JWT Token
+            const token = jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
+                expiresIn: "1h", // Token expires in 1 hour
+            });
+            console.log("Generated Token:", token);
 
             // Add the token to cookie and send the response back to the user
-
-            res.cookie("json-token", "sdfghjklkjhgfdsaqwertyuio12345678asdfghjk");
-
+            // Add the token to cookie
+            res.cookie("json-token", token, {
+                httpOnly: true, // Ensures cookie is not accessible via JavaScript
+                secure: false, // Set to true if using HTTPS
+                maxAge: 3600000, // Cookie expires in 1 hour (same as token)
+            });
 
             res.send("Login successfully")
         } else {
@@ -71,17 +79,17 @@ app.post("/login", async (req, res) => {
 // Get Profile
 app.get("/profile", async (req, res) => {
     try {
-        // Access cookies as an object
-        const cookies = req.cookies;
-
-        console.log("Cookies:", cookies);
-
-        // Validate or use the cookie (example: check for the "json-token")
-        if (!cookies["json-token"]) {
+        // Access cookies
+        const token = req.cookies["json-token"]; // Ensure cookie name matches
+        if (!token) {
             throw new Error("Authentication token not found in cookies.");
         }
 
-        res.send("Profile data retrieved successfully & cookies read.");
+        // Validate the token
+        const isTokenValid = jwt.verify(token, "DEV@Tinder$790");
+        console.log("Decoded Token:", isTokenValid);
+
+        res.send("Profile data retrieved successfully.");
     } catch (err) {
         res.status(400).send("Error: " + err.message);
     }

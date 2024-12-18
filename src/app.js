@@ -4,8 +4,10 @@ const app = express();
 const User = require("./models/user");
 const { validateSignupData } = require("./utils/validation.js")
 const bcrypt = require("bcrypt")
+const cookieParser = require("cookie-parser")
 
 app.use(express.json());
+app.use(cookieParser())
 
 
 // Creating a new instance of the User Model - POST
@@ -42,21 +44,49 @@ app.post("/login", async (req, res) => {
 
         const user = await User.findOne({ emailId: emailId});
         if(!user) {
-            throw new Error("EmailID is not in our DB or invalid EmailID")
+            throw new Error("Invalid Credentials")
         }
 
         const isPasswordValid = await bcrypt.compareSync(password, user.password)
 
         if(isPasswordValid) {
+            // Create a JWT Token
+
+            // Add the token to cookie and send the response back to the user
+
+            res.cookie("json-token", "sdfghjklkjhgfdsaqwertyuio12345678asdfghjk");
+
+
             res.send("Login successfully")
         } else {
-            throw new Error("Password is not correct")
+            throw new Error("Invalid Credentials")
         }
 
     } catch (err) {
         res.status(400).send("ERR: : " + err);
     }
 })
+
+
+// Get Profile
+app.get("/profile", async (req, res) => {
+    try {
+        // Access cookies as an object
+        const cookies = req.cookies;
+
+        console.log("Cookies:", cookies);
+
+        // Validate or use the cookie (example: check for the "json-token")
+        if (!cookies["json-token"]) {
+            throw new Error("Authentication token not found in cookies.");
+        }
+
+        res.send("Profile data retrieved successfully & cookies read.");
+    } catch (err) {
+        res.status(400).send("Error: " + err.message);
+    }
+});
+
 
 
 // getting data from DB - GET

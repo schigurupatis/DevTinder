@@ -91,4 +91,5 @@
 - Validate data in Signup API
 - Install bcrypt npm package
 - Create a PasswordHash using bcrypt.hash method & save the user with encrypted password in DB
-- 
+- Create Login API
+- Compare passwords and throw errors if email or password is invalid

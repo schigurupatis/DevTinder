@@ -6,6 +6,7 @@ const { validateSignupData } = require("./utils/validation.js")
 const bcrypt = require("bcrypt")
 const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken")
+const { userAuth } = require("./middleware/auth.js")
 
 app.use(express.json());
 app.use(cookieParser())
@@ -77,32 +78,40 @@ app.post("/login", async (req, res) => {
 
 
 // Get Profile
-app.get("/profile", async (req, res) => {
+app.get("/profile", userAuth, async (req, res) => {
     try {
-        // Access cookies
-        const token = req.cookies["json-token"]; // Ensure cookie name matches
-        if (!token) {
-            throw new Error("Authentication token not found in cookies.");
-        }
 
-        // Validate the token
-        const decodedMessage = jwt.verify(token, "DEV@Tinder$790");
-        console.log("Decoded Token:", decodedMessage);
+        const user = req.user;
 
-        const { _id } = decodedMessage;
+        // // Access cookies
+        // const token = req.cookies["json-token"]; // Ensure cookie name matches
+        // if (!token) {
+        //     throw new Error("Authentication token not found in cookies.");
+        // }
 
-        console.log("LoggedIn user is: " + _id);
-        const user = await User.findById(_id);
-        if(!user) {
-            throw new Error("User does not exist")
-        }
+        // // Validate the token
+        // const decodedMessage = jwt.verify(token, "DEV@Tinder$790");
+        // //console.log("Decoded Token:", decodedMessage);
 
-        res.send("Profile data retrieved successfully." + user);
+        // const { _id } = decodedMessage;
+
+        
+
+        res.send(user);
     } catch (err) {
         res.status(400).send("Error: " + err.message);
     }
 });
 
+
+// Sending Connection Request
+app.post("/sendConnectionRequest", userAuth, (req, res) => {
+    const user = req.user;
+    // Sending a connection request
+    console.log("Sending a connection request");
+
+    res.send(user.firstName + " sent a connection request");
+})
 
 
 // getting data from DB - GET

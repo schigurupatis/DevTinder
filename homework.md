@@ -93,3 +93,16 @@
 - Create a PasswordHash using bcrypt.hash method & save the user with encrypted password in DB
 - Create Login API
 - Compare passwords and throw errors if email or password is invalid
+
+
+
+
+
+# Episode 10: Authentication, JWT & Cookies
+
+- Install CookieParser
+- Send Dummy Cookie to user
+- Create GET /Profile API and check if you get the cookie back
+- Install jsonwebtoke package
+- Login API, after email and password validation, create a JWT Token and send it to user in cookie
+- Read the cookies inside your profile API to find the loggedIn user

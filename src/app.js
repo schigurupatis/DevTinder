@@ -86,10 +86,18 @@ app.get("/profile", async (req, res) => {
         }
 
         // Validate the token
-        const isTokenValid = jwt.verify(token, "DEV@Tinder$790");
-        console.log("Decoded Token:", isTokenValid);
+        const decodedMessage = jwt.verify(token, "DEV@Tinder$790");
+        console.log("Decoded Token:", decodedMessage);
 
-        res.send("Profile data retrieved successfully.");
+        const { _id } = decodedMessage;
+
+        console.log("LoggedIn user is: " + _id);
+        const user = await User.findById(_id);
+        if(!user) {
+            throw new Error("User does not exist")
+        }
+
+        res.send("Profile data retrieved successfully." + user);
     } catch (err) {
         res.status(400).send("Error: " + err.message);
     }

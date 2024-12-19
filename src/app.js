@@ -2,114 +2,32 @@ const express = require("express");
 const connectDB = require("./config/database")
 const app = express();
 const User = require("./models/user");
-const { validateSignupData } = require("./utils/validation.js")
-const bcrypt = require("bcrypt")
 const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken")
-const { userAuth } = require("./middleware/auth.js")
 
 app.use(express.json());
 app.use(cookieParser())
 
 
 // Creating a new instance of the User Model - POST
-app.post("/signup", async (req, res) => {
-    try {
-        // 1. Validation of data 
-        validateSignupData(req);
-
-        const { firstName, lastName, emailId, password } = req.body;
-
-        // 2. Encrypt the Password
-        const passwordHash = bcrypt.hashSync(password, 10);
-        //console.log(passwordHash)
-
-        // 3. Store the user instance in DB
-        //const user = new User(req.body)
-        const user = new User({
-            firstName, lastName, emailId, password: passwordHash,
-        })
-        await user.save();  
-        res.send("User Added Successfully")
-    } catch (err) {
-        res.status(400).send("Error saving the user:" + err.message);
-    }
-
-
-
-});
+const authRouter = require("./routes/auth")
 
 // Login API 
-app.post("/login", async (req, res) => {
-    try{
-        const {emailId, password} = req.body;
 
-        const user = await User.findOne({ emailId});
-        if(!user) {
-            throw new Error("Invalid Credentials")
-        }
-
-        const isPasswordValid = await user.validatePassword
-
-        if(isPasswordValid) {
-            // Create a JWT Token
-            const token = await user.getJWT();
-            console.log("Generated Token:", token);
-
-            // Add the token to cookie and send the response back to the user
-            // Add the token to cookie
-            res.cookie("json-token", token, {
-                httpOnly: true, // Ensures cookie is not accessible via JavaScript
-                secure: false, // Set to true if using HTTPS
-                maxAge: 3600000, // Cookie expires in 1 hour (same as token)
-            });
-
-            res.send("Login successfully")
-        } else {
-            throw new Error("Invalid Credentials")
-        }
-
-    } catch (err) {
-        res.status(400).send("ERR: : " + err);
-    }
-})
 
 
 // Get Profile
-app.get("/profile", userAuth, async (req, res) => {
-    try {
-
-        const user = req.user;
-
-        // // Access cookies
-        // const token = req.cookies["json-token"]; // Ensure cookie name matches
-        // if (!token) {
-        //     throw new Error("Authentication token not found in cookies.");
-        // }
-
-        // // Validate the token
-        // const decodedMessage = jwt.verify(token, "DEV@Tinder$790");
-        // //console.log("Decoded Token:", decodedMessage);
-
-        // const { _id } = decodedMessage;
-
-        
-
-        res.send(user);
-    } catch (err) {
-        res.status(400).send("Error: " + err.message);
-    }
-});
+const profileRouter = require("./routes/profile")
 
 
 // Sending Connection Request
-app.post("/sendConnectionRequest", userAuth, (req, res) => {
-    const user = req.user;
-    // Sending a connection request
-    console.log("Sending a connection request");
+const requestRouter = require("./routes/request")
 
-    res.send(user.firstName + " sent a connection request");
-})
+
+
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
 
 
 // getting data from DB - GET

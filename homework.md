@@ -112,3 +112,13 @@
 - Create user schema method to getJWT()
 - Create user schema method to compare passwords
 
+
+
+
+
+# Episode 11: Diving into the APIs and express Router
+
+- Go and Explore Tinder API's
+- Create a list of all API's you can think of in DevTinder 
+- Group multiple routes under respective routers
+

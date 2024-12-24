@@ -130,3 +130,9 @@
 - Create PATCH /profile/password API => forgot password API
 - Make sure you validate all data in every POST, PATCH API's
 
+
+
+# Episode 12: Logical DB Query & Compound Indexces
+
+- 
+

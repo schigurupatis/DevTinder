@@ -10,6 +10,15 @@ requestRouter.post("/rquest/send/interested/:toUserId", userAuth, (req, res) => 
     // Sending a connection request
     console.log("Sending a connection request");
 
+    async (req, res) => {
+        try{
+            const fromUserId = req.user._id;
+        } catch (err) {
+    
+        }
+    }
+
+
     res.send(user.firstName + " sent a connection request");
 })
 

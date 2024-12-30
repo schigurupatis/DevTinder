@@ -20,14 +20,26 @@ const connectionRequestSchema = new mongoose.Schema(
         },
     },
     {
-        timeseries: true,
+        timestamps: true, // Fixed typo: use `timestamps` to track creation and update times
     }
 );
 
+// Validate before saving
+connectionRequestSchema.pre("save", function (next) {
+    const connectionRequest = this;
 
-const ConnectionRequestModel = new mongoose.model(
+    // Check if the `fromUserId` is the same as `toUserId`
+    if (connectionRequest.fromUserId.equals(connectionRequest.toUserId)) {
+        return next(new Error("You cannot send a connection request to yourself"));
+    }
+
+    // Pass control to the next middleware or save the document
+    next();
+});
+
+const ConnectionRequestModel = mongoose.model(
     "ConnectionRequest",
     connectionRequestSchema
-)
+);
 
 module.exports = ConnectionRequestModel;

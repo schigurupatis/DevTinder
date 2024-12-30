@@ -134,5 +134,18 @@
 
 # Episode 12: Logical DB Query & Compound Indexces
 
+- Read more about indexes in MongoDB
+- Why do we need index in DB?
+- What is the advantages and disadvantages of creating indexes?
+- Compound Indexes in Mongo DB
+- Send Connection Request API
+- Proper validations Data of API
+- Schema.pre function
+- $or function
+
+
+
+# Episode 13: ref, Populate & Thought process of writing APIs
+
 - 
 

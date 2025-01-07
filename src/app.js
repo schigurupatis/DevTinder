@@ -115,6 +115,6 @@ connectDB()
         });
 
     }).catch((err) => {
-        console.log("Database connection failed")
+        console.log("Database connection failed");
     })
 

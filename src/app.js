@@ -11,23 +11,16 @@ app.use(cookieParser())
 
 // Creating a new instance of the User Model - POST
 const authRouter = require("./routes/auth")
-
-// Login API 
-
-
-
-// Get Profile
 const profileRouter = require("./routes/profile")
-
-
-// Sending Connection Request
-const requestRouter = require("./routes/request")
+const requestRouter = require("./routes/request");
+const userRouter = require("./routes/user");
 
 
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
+app.use("/", userRouter);
 
 
 // getting data from DB - GET

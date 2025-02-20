@@ -147,5 +147,5 @@
 # Episode 13: ref, Populate & Thought process of writing APIs
 
 - write code with proper validations for "REVIEW POST API" /request/review/:status/:requestId
-
+- POST & GET API thought process
 

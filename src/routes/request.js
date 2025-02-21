@@ -29,7 +29,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
         }
 
         //checking if there is an existing connection request
-        const existingConnectionRequest = await connectionRequest.findOne({
+        const existingConnectionRequest = await ConnectionRequest.findOne({
             $or: [
                 {
                     fromUserId,
@@ -73,11 +73,11 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
     //res.send(user.firstName + " sent a connection request");
 })
 
-// Sending Review Request
+// Sending Review Request(accept or reject)
 requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {
     try{
         const loggedInUser = req.user;
-        const { status, reqestId } = req.params;
+        const { status, requestId } = req.params;
 
         const allowedStatus = ["accepted", "rejected"];
         if(!allowedStatus.includes(status)) {
@@ -87,7 +87,7 @@ requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, r
 
         // validate the status
         const connectionRequest = await ConnectionRequest.findOne({
-            _id: reqestId,
+            _id: requestId,
             toUserId: loggedInUser._id,
             status: "interested"
         })
@@ -109,7 +109,7 @@ requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, r
 
 
     } catch(err) {
-        res.status(400).send("ERROR: ", err.message);
+        res.status(400).send("ERROR: " + err.message);
     }
 })
 

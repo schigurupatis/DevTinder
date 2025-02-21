@@ -1,16 +1,16 @@
 const express = require("express");
 const requestRouter = express.Router();
 const { userAuth } = require("../middleware/auth.js");
-const ConnectionRequestModel = require("../models/connectionRequest.js");
-const UserModel = require("../models/user.js")
+const ConnectionRequest = require("../models/connectionRequest.js");
+const User = require("../models/user.js")
 
 
 
 // Sending Connection Request
 requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
-    const user = req.user;
+    //const user = req.user;
     // Sending a connection request
-    console.log("Sending a connection request");
+    //console.log("Sending a connection request");
     try{
         const fromUserId = req.user._id;
         const toUserId = req.params.toUserId;
@@ -23,13 +23,13 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
             return res.status(400).json({message: "Invalid status type: " + status });
         }
 
-        const toUser = await UserModel.findById(toUserId);
+        const toUser = await User.findById(toUserId);
         if(!toUser) {
             return res.status(404).json({message: "User not found!"})
         }
 
         //checking if there is an existing connection request
-        const existingConnectionRequest = await ConnectionRequestModel.findOne({
+        const existingConnectionRequest = await connectionRequest.findOne({
             $or: [
                 {
                     fromUserId,
@@ -52,7 +52,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 
 
         //making connection request
-        const connectionRequest = new ConnectionRequestModel({
+        const connectionRequest = new ConnectionRequest({
             fromUserId,
             toUserId,
             status,
@@ -62,7 +62,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
         const data = await connectionRequest.save();
 
         res.json({
-            message: ` ${req.user.firstName} is ${status} in ${toUser.firstName}`,
+            message: `${req.user.firstName} is ${status} in ${toUser.firstName}`,
             data,  
         })
 
@@ -77,7 +77,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {
     try{
         const loggedInUser = req.user;
-        const { status, reqestId } = req.params.status;
+        const { status, reqestId } = req.params;
 
         const allowedStatus = ["accepted", "rejected"];
         if(!allowedStatus.includes(status)) {

@@ -2,6 +2,7 @@ const express = require("express");
 const { userAuth } = require("../middleware/auth");
 const userRouter = express.Router();
 const ConnectionRequest = require("../models/connectionRequest");
+const User = require("../models/user");
 
 const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills";
 
@@ -58,6 +59,48 @@ userRouter.get("/user/connections", userAuth, async(req, res) => {
 
 });
 
+
+// Get all users info (Feed API)
+userRouter.get("/user/feed", userAuth, async(req, res) => {
+    try{
+        // User should see all the user cards except
+        // 0. His own card
+        // 1. His connections
+        // 2. Ignored People
+        // 3. Already sent the connection request
+        
+        // Example Elon = [Rashmika, Pooja, Dhone, Kumar, Mark, Trump]
+        // Dont show "already accepted connections" & "already rejected connections"
+
+        const loggedInUser = req.user;
+
+        // Find all connection requests (send + received)
+        const connectionRequests = await ConnectionRequest.find({
+            $or: [
+                { fromUserId: loggedInUser._id },
+                { toUserId: loggedInUser._id },
+            ]
+        }).select("fromUserId toUserId");
+
+        const hideUsersFromFeed = new Set();
+        connectionRequests.forEach((req) => {
+            hideUsersFromFeed.add(req.fromUserId.toHexString());
+            hideUsersFromFeed.add(req.toUserId.toHexString());
+        });
+
+        const users = await User.find({
+            $and: [
+                { _id: { $nin: Array.from(hideUsersFromFeed)} },
+                { _id: { $ne: loggedInUser._id} },
+            ],
+        }).select(USER_SAFE_DATA);
+
+        res.send(users);
+
+    } catch(err) {
+        res.status(400).json({message: err.message});
+    }
+});
 
 
 

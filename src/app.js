@@ -55,7 +55,7 @@ app.get("/feed", async (req, res) => {
         res.status(404).send("something went wrong")
     }
 
-    res.send("All users data");
+    //res.send("All users data");
 })
 
 // deleting user data - DELETE

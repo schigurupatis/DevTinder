@@ -129,26 +129,35 @@ userRouter.get("/user/feed", userAuth, async (req, res) => {
                 { fromUserId: loggedInUser._id },
                 { toUserId: loggedInUser._id },
             ],
-            status: { $in: ["accepted", "rejected", "ignored"] }, // Exclude these statuses
+            //status: { $in: ["accepted", "rejected", "ignored"] }, // Exclude these statuses
         }).select("fromUserId toUserId");
 
         // Collect users to hide
         const hideUsersFromFeed = new Set();
         connectionRequests.forEach((req) => {
-            hideUsersFromFeed.add(req.fromUserId.toHexString());
-            hideUsersFromFeed.add(req.toUserId.toHexString());
+            hideUsersFromFeed.add(req.fromUserId.toString());
+            hideUsersFromFeed.add(req.toUserId.toString());
         });
 
         // Also hide the logged-in user
-        hideUsersFromFeed.add(loggedInUser._id.toHexString());
+        hideUsersFromFeed.add(loggedInUser._id.toString());
 
         // Fetch users excluding logged-in user and filtered users
+        // const users = await User.find({
+        //     _id: { $nin: Array.from(hideUsersFromFeed) } // Exclude hidden users
+        // })
+        // .select(USER_SAFE_DATA)
+        // .skip(skip)
+        // .limit(limit);
         const users = await User.find({
-            _id: { $nin: Array.from(hideUsersFromFeed) } // Exclude hidden users
-        })
-        .select(USER_SAFE_DATA)
-        .skip(skip)
-        .limit(limit);
+            $and: [
+              { _id: { $nin: Array.from(hideUsersFromFeed) } },
+              { _id: { $ne: loggedInUser._id } },
+            ],
+          })
+            .select(USER_SAFE_DATA)
+            .skip(skip)
+            .limit(limit);
 
         res.json({
             message: "All Feed Data is",

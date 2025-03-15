@@ -20,16 +20,16 @@ const createSendEmailCommand = (toAddress, fromAddress) => {
           /* required */
           Html: {
             Charset: "UTF-8",
-            Data: "HTML_FORMAT_BODY",
+            Data: "<h1>This is the email body</h1>",
           },
           Text: {
             Charset: "UTF-8",
-            Data: "TEXT_FORMAT_BODY",
+            Data: "This is the text format email",
           },
         },
         Subject: {
           Charset: "UTF-8",
-          Data: "EMAIL_SUBJECT",
+          Data: "Hello world from SES",
         },
       },
       Source: fromAddress,
@@ -38,3 +38,25 @@ const createSendEmailCommand = (toAddress, fromAddress) => {
       ],
     });
   };
+
+
+  const run = async () => {
+    const sendEmailCommand = createSendEmailCommand(
+      "cskfiles1@gmail.com",
+      "csk@devstinder.com",
+    );
+  
+    try {
+      return await sesClient.send(sendEmailCommand);
+    } catch (caught) {
+      if (caught instanceof Error && caught.name === "MessageRejected") {
+        /** @type { import('@aws-sdk/client-ses').MessageRejected} */
+        const messageRejectedError = caught;
+        return messageRejectedError;
+      }
+      throw caught;
+    }
+  };
+
+
+  module.exports = { run };

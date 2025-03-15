@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken")
 const cors = require("cors")
 
+require("dotenv").config();
+
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true,
@@ -104,15 +106,27 @@ app.patch("/user", async (req, res) => {
 
 
 //Connecting to DataBase & Listening the Server
+// connectDB()
+//     .then(() => {
+//         console.log("Database connection success");
+
+//         app.listen(7777, () => {
+//             console.log("Server is successfully listening on port 7777...");
+//         });
+
+//     }).catch((err) => {
+//         console.log("Database connection failed");
+//     })
+
+
 connectDB()
-    .then(() => {
-        console.log("Database connection success");
-
-        app.listen(7777, () => {
-            console.log("Server is successfully listening on port 7777...");
-        });
-
-    }).catch((err) => {
-        console.log("Database connection failed");
-    })
+  .then(() => {
+    console.log("Database connection established...");
+    app.listen(process.env.PORT, () => {
+      console.log("Database is successfully listening on port 7777...");
+    });
+  })
+  .catch((err) => {
+    console.error("Database cannot be connected!!");
+  });
 

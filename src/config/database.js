@@ -1,10 +1,19 @@
+// const mongoose = require("mongoose");
+
+// const connectDB = async () => {
+//     await mongoose.connect(
+//         process.env.DB_CONNECTION_SECRET
+//     );
+// }
+
+// module.exports = connectDB;
+
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-    await mongoose.connect(
-        "mongodb+srv://schigurupatis:FNwYaNkBi5jNF7oT@schigurupatis.qlawi.mongodb.net/DevTinderDB"
-    );
-}
+  console.log(process.env.DB_CONNECTION_SECRET);
+  await mongoose.connect(process.env.DB_CONNECTION_SECRET);
+};
 
 module.exports = connectDB;
 
